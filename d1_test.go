@@ -29,28 +29,28 @@ func TestD1P1(t *testing.T) {
 
 func TestD1P2(t *testing.T) {
 	s := "abcone2threexyz"
-	num, ok, left := parseChunk(s)
+	num, ok, left := d1ParseChunk(s)
 	require.True(t, ok)
 	require.Equal(t, 1, num)
 	require.Equal(t, "2threexyz", left)
 
-	num, ok, left = parseChunk(left)
+	num, ok, left = d1ParseChunk(left)
 	require.True(t, ok)
 	require.Equal(t, 2, num)
 	require.Equal(t, "threexyz", left)
 
-	num, ok, left = parseChunk(left)
+	num, ok, left = d1ParseChunk(left)
 	require.True(t, ok)
 	require.Equal(t, 3, num)
 	require.Equal(t, "xyz", left)
 
-	num, ok, left = parseChunk(left)
+	num, ok, left = d1ParseChunk(left)
 	require.False(t, ok)
 	require.Equal(t, 0, num)
 	require.Equal(t, "", left)
 
 	s = `xtwone3four`
-	num, ok, left = parseChunk(s)
+	num, ok, left = d1ParseChunk(s)
 	require.True(t, ok)
 	require.Equal(t, 2, num)
 	require.Equal(t, "one3four", left)

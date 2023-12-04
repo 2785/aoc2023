@@ -3,6 +3,7 @@ module github.com/2785/aoc2023
 go 1.21.4
 
 require (
+	github.com/gammazero/deque v0.2.1
 	github.com/samber/lo v1.39.0
 	github.com/spf13/cobra v1.8.0
 	github.com/stretchr/testify v1.8.1

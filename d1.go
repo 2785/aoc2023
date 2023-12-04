@@ -61,10 +61,10 @@ func doD1P2(input []string) int {
 	for _, line := range input {
 		var nums []int
 
-		num, ok, left := parseChunk(line)
+		num, ok, left := d1ParseChunk(line)
 		for ok {
 			nums = append(nums, num)
-			num, ok, left = parseChunk(left)
+			num, ok, left = d1ParseChunk(left)
 		}
 
 		if len(nums) == 0 {
@@ -77,7 +77,7 @@ func doD1P2(input []string) int {
 	return sum
 }
 
-var wordMap = map[string]int{
+var d1wordMap = map[string]int{
 	"one":   1,
 	"two":   2,
 	"three": 3,
@@ -89,7 +89,7 @@ var wordMap = map[string]int{
 	"nine":  9,
 }
 
-func parseChunk(chunk string) (num int, ok bool, left string) {
+func d1ParseChunk(chunk string) (num int, ok bool, left string) {
 	// if first thing in the chunk is an actual number, we're done
 	if len(chunk) == 0 {
 		return 0, false, ""
@@ -101,12 +101,12 @@ func parseChunk(chunk string) (num int, ok bool, left string) {
 	}
 
 	// otherwise if it starts with any number text spelled out, we parse that & we're done
-	for word, num := range wordMap {
+	for word, num := range d1wordMap {
 		if strings.HasPrefix(chunk, word) {
 			return num, true, chunk[1:]
 		}
 	}
 
 	// otherwise we chop off the first letter & try again
-	return parseChunk(chunk[1:])
+	return d1ParseChunk(chunk[1:])
 }
