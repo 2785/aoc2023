@@ -9,12 +9,16 @@ import (
 	"github.com/samber/lo"
 )
 
-func loadLines(d int) []string {
+func loadFileAsString(d int) string {
 	fn := fmt.Sprintf("data/d%d.txt", d)
 	content, err := os.ReadFile(fn)
 	c(err)
 
-	return sanitizeInput(string(content))
+	return string(content)
+}
+
+func loadLines(d int) []string {
+	return sanitizeInput(loadFileAsString(d))
 }
 
 func sanitizeInput(in string) []string {
@@ -52,4 +56,13 @@ func atoi(s string) int {
 	c(err)
 
 	return n
+}
+
+func mustTrimPrefix(s, prefix string) string {
+	res := strings.TrimPrefix(s, prefix)
+	if res == s {
+		panic(fmt.Sprintf("expected %q to have prefix %q", s, prefix))
+	}
+
+	return strings.TrimSpace(res)
 }
