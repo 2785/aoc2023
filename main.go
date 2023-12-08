@@ -12,7 +12,7 @@ var s *zap.SugaredLogger
 
 func init() {
 	var err error
-	l, err = zap.NewProduction()
+	l, err = zap.NewDevelopment(zap.WithCaller(false))
 	c(err)
 
 	zap.ReplaceGlobals(l)
